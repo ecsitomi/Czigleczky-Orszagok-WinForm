@@ -38,6 +38,15 @@ namespace WindowsFormsApp1
             }
         }
 
+        private void textbox_ForrasFajl_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                openFileDialog1.FileName = "orszagok.csv";
+                OrszagokBeolvasasa(openFileDialog1.FileName);
+            }
+        }
+
         private void OrszagokBeolvasasa(string forrasFajl) //betöltött fájl beolvasása a listaBoxba
         {
             using (StreamReader sr = new StreamReader(forrasFajl))
@@ -55,8 +64,12 @@ namespace WindowsFormsApp1
             //Bekapcsolom a kikapcsolt gombokat
             button_Betoltes.Enabled = false;
             button_Betoltes.Text = "Betöltve";
+            button_Teruletek.Enabled = true;
+            button_Csokkeno.Enabled = true;
+            button_Novekvo.Enabled = true;
             button_Helyreallit.Enabled = true;
             button_Megszamolas.Enabled = true;
+            button_Kiiras.Enabled = true;
             button_Kereses.Enabled = true;
             comboBox_MinMax.Enabled = true;
         }
@@ -67,6 +80,8 @@ namespace WindowsFormsApp1
             comboBox_MinMax.Enabled = false; //átlagban nincs min max, itt kikapcsolom ezt a funkciót
             //button_Kereses.Enabled = false; //szintén felesleges
                                               //vagy mégsem, mert a vizsgált lista visszaállítható
+            button_Csokkeno.Enabled = false;
+            button_Novekvo.Enabled = false;
 
             double osszesTerulet = 0;
             int orszagokSzama = 0;
@@ -101,6 +116,8 @@ namespace WindowsFormsApp1
             comboBox_MinMax.Enabled = true; //ezt sajnos mindenhol be kell kapcsolnom külön-külön
             button_Kereses.Enabled = true; //ezt is
             button_Teruletek.Enabled = true;
+            button_Csokkeno.Enabled = true;
+            button_Novekvo.Enabled = true;
 
             if (eredetiLista.Count !=0 )
             {
@@ -119,6 +136,8 @@ namespace WindowsFormsApp1
             comboBox_MinMax.Enabled = true;
             button_Kereses.Enabled = true;
             button_Teruletek.Enabled = true;
+            button_Csokkeno.Enabled = true;
+            button_Novekvo.Enabled = true;
 
             listBox_Orszagok.Items.Clear();
             vizsgaltLista.Clear();
@@ -155,6 +174,8 @@ namespace WindowsFormsApp1
         {
             button_Teruletek.Enabled = false; //felesleges funkció itt
             button_Kereses.Enabled = true; //ez viszont kellhet mert betölti az előző listát a kereséshez
+            button_Csokkeno.Enabled = false;
+            button_Novekvo.Enabled = false;
 
             double legkisebb = double.MaxValue;
             double legnagyobb = 0;
@@ -201,7 +222,11 @@ namespace WindowsFormsApp1
         private void button_Kereses_Click(object sender, EventArgs e)
         {
             string beirtSzoveg = textBox_KeresendoOrszag.Text.Trim().ToLower(); //levágja a spacet és kisbetűssé teszi
+            
             button_Teruletek.Enabled = true;
+            button_Csokkeno.Enabled = true;
+            button_Novekvo.Enabled = true;
+
             Orszag eredmeny = null;
             List<Orszag> talalatLista = new List<Orszag>();
 
@@ -301,14 +326,37 @@ namespace WindowsFormsApp1
             }
         }
 
+        //Csökkenő - Növekvő sorrend
         private void button_Csokkeno_Click(object sender, EventArgs e)
         {
-
+            if (listBox_Orszagok.Items.Count > 1 && listBox_Orszagok.Items[0] is Orszag)
+            {
+                vizsgaltLista = listBox_Orszagok.Items.Cast<Orszag>().ToList(); //listBoxbol Ország lista lesz
+                vizsgaltLista = vizsgaltLista.OrderByDescending(o => o.Terulet).ToList(); //csökkenő sorrend
+                listBox_Orszagok.Items.Clear();
+                listBox_Orszagok.Items.AddRange(vizsgaltLista.ToArray()); //kiíratás
+            }
+            else
+            {
+                MessageBox.Show("Az elemek típusa nem megfelelő");
+            }
         }
 
         private void button_Novekvo_Click(object sender, EventArgs e)
         {
-
+            if (listBox_Orszagok.Items.Count > 1 && listBox_Orszagok.Items[0] is Orszag)
+            {
+                vizsgaltLista = listBox_Orszagok.Items.Cast<Orszag>().ToList();
+                vizsgaltLista = vizsgaltLista.OrderBy(o => o.Terulet).ToList(); //növekvő
+                listBox_Orszagok.Items.Clear();
+                listBox_Orszagok.Items.AddRange(vizsgaltLista.ToArray());
+            }
+            else
+            {
+                MessageBox.Show("Az elemek típusa nem megfelelő");
+            }
         }
+
+        
     }
 }

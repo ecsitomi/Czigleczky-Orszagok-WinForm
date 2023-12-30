@@ -70,6 +70,7 @@
             this.textbox_ForrasFajl.Size = new System.Drawing.Size(174, 20);
             this.textbox_ForrasFajl.TabIndex = 1;
             this.textbox_ForrasFajl.Text = "orszagok.csv";
+            this.textbox_ForrasFajl.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textbox_ForrasFajl_KeyPress);
             // 
             // button_Betoltes
             // 
@@ -92,6 +93,7 @@
             // 
             // button_Teruletek
             // 
+            this.button_Teruletek.Enabled = false;
             this.button_Teruletek.Location = new System.Drawing.Point(16, 299);
             this.button_Teruletek.Name = "button_Teruletek";
             this.button_Teruletek.Size = new System.Drawing.Size(174, 23);
@@ -163,6 +165,7 @@
             // 
             // button_Kiiras
             // 
+            this.button_Kiiras.Enabled = false;
             this.button_Kiiras.Location = new System.Drawing.Point(196, 156);
             this.button_Kiiras.Name = "button_Kiiras";
             this.button_Kiiras.Size = new System.Drawing.Size(197, 23);
@@ -250,6 +253,7 @@
             // 
             // button_Csokkeno
             // 
+            this.button_Csokkeno.Enabled = false;
             this.button_Csokkeno.Location = new System.Drawing.Point(17, 267);
             this.button_Csokkeno.Name = "button_Csokkeno";
             this.button_Csokkeno.Size = new System.Drawing.Size(83, 23);
@@ -260,6 +264,7 @@
             // 
             // button_Novekvo
             // 
+            this.button_Novekvo.Enabled = false;
             this.button_Novekvo.Location = new System.Drawing.Point(106, 267);
             this.button_Novekvo.Name = "button_Novekvo";
             this.button_Novekvo.Size = new System.Drawing.Size(84, 23);
