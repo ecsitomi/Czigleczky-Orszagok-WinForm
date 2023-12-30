@@ -100,6 +100,7 @@ namespace WindowsFormsApp1
         {
             comboBox_MinMax.Enabled = true; //ezt sajnos mindenhol be kell kapcsolnom külön-külön
             button_Kereses.Enabled = true; //ezt is
+            button_Teruletek.Enabled = true;
 
             if (eredetiLista.Count !=0 )
             {
@@ -117,6 +118,7 @@ namespace WindowsFormsApp1
         {
             comboBox_MinMax.Enabled = true;
             button_Kereses.Enabled = true;
+            button_Teruletek.Enabled = true;
 
             listBox_Orszagok.Items.Clear();
             vizsgaltLista.Clear();
@@ -152,7 +154,7 @@ namespace WindowsFormsApp1
         private void comboBox_MinMax_SelectedIndexChanged(object sender, EventArgs e)
         {
             button_Teruletek.Enabled = false; //felesleges funkció itt
-            button_Kereses.Enabled = true; //ez viszont kellhet
+            button_Kereses.Enabled = true; //ez viszont kellhet mert betölti az előző listát a kereséshez
 
             double legkisebb = double.MaxValue;
             double legnagyobb = 0;
@@ -172,7 +174,7 @@ namespace WindowsFormsApp1
             }
             foreach (Orszag orszag in listBox_Orszagok.Items)
             {
-                //vizsgaltLista.Add(orszag);
+                //vizsgaltLista.Add(orszag); //foreachben is hozzáadhatnám, de duplán adná hozzá
                 if (orszag.Terulet < legkisebb) 
                 {
                     legkisebb = orszag.Terulet;
@@ -192,13 +194,14 @@ namespace WindowsFormsApp1
             else 
             {
                 listBox_Orszagok.Items.Add(legnagyobbOrszag);
-            } //Sikerült :)
+            } 
         }
 
         //Keresés
         private void button_Kereses_Click(object sender, EventArgs e)
         {
             string beirtSzoveg = textBox_KeresendoOrszag.Text.Trim().ToLower(); //levágja a spacet és kisbetűssé teszi
+            button_Teruletek.Enabled = true;
             Orszag eredmeny = null;
             List<Orszag> talalatLista = new List<Orszag>();
 
@@ -258,7 +261,52 @@ namespace WindowsFormsApp1
             }
         }
 
+        //Fájlba mentés - segített a chatGPT kicsit
         private void button_Kiiras_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+            saveFileDialog1.Filter = "Szövegfájl (*.txt)|*.txt|Vesszővel elválasztott dokumentum (*.csv)|*.csv|Minden fájl|*.*";
+            saveFileDialog1.Title = "Mentés mint";
+            saveFileDialog1.InitialDirectory = Environment.CurrentDirectory;
+            saveFileDialog1.FileName = "eredmeny.txt";
+
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                string fileName = saveFileDialog1.FileName;
+
+                try
+                {
+                    using (StreamWriter sw = new StreamWriter(fileName))
+                    {
+                        foreach (var item in listBox_Orszagok.Items)
+                        {
+                            if (item is Orszag orszag)
+                            {
+                                string sor = $"{orszag.Orszagnev};{orszag.Terulet}";
+                                sw.WriteLine(sor);
+                            }
+                            if (item is string stringValue) //átlag terület miatt
+                            { 
+                                sw.WriteLine (stringValue);
+                            }
+                        }
+                    }
+
+                    MessageBox.Show("Mentés sikeres!");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Hiba történt a mentés során: {ex.Message}");
+                }
+            }
+        }
+
+        private void button_Csokkeno_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button_Novekvo_Click(object sender, EventArgs e)
         {
 
         }

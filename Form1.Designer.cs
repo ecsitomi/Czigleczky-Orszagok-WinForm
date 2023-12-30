@@ -49,6 +49,8 @@
             this.button_Kereses = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.button_Helyreallit = new System.Windows.Forms.Button();
+            this.button_Csokkeno = new System.Windows.Forms.Button();
+            this.button_Novekvo = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -85,7 +87,7 @@
             this.listBox_Orszagok.FormattingEnabled = true;
             this.listBox_Orszagok.Location = new System.Drawing.Point(16, 87);
             this.listBox_Orszagok.Name = "listBox_Orszagok";
-            this.listBox_Orszagok.Size = new System.Drawing.Size(174, 199);
+            this.listBox_Orszagok.Size = new System.Drawing.Size(174, 173);
             this.listBox_Orszagok.TabIndex = 3;
             // 
             // button_Teruletek
@@ -212,7 +214,7 @@
             // checkBox_PontosTalalat
             // 
             this.checkBox_PontosTalalat.AutoSize = true;
-            this.checkBox_PontosTalalat.Location = new System.Drawing.Point(196, 275);
+            this.checkBox_PontosTalalat.Location = new System.Drawing.Point(197, 273);
             this.checkBox_PontosTalalat.Name = "checkBox_PontosTalalat";
             this.checkBox_PontosTalalat.Size = new System.Drawing.Size(90, 17);
             this.checkBox_PontosTalalat.TabIndex = 14;
@@ -246,11 +248,33 @@
             this.button_Helyreallit.UseVisualStyleBackColor = false;
             this.button_Helyreallit.Click += new System.EventHandler(this.button_Helyreallit_Click);
             // 
+            // button_Csokkeno
+            // 
+            this.button_Csokkeno.Location = new System.Drawing.Point(17, 267);
+            this.button_Csokkeno.Name = "button_Csokkeno";
+            this.button_Csokkeno.Size = new System.Drawing.Size(83, 23);
+            this.button_Csokkeno.TabIndex = 17;
+            this.button_Csokkeno.Text = "Csökkenő";
+            this.button_Csokkeno.UseVisualStyleBackColor = true;
+            this.button_Csokkeno.Click += new System.EventHandler(this.button_Csokkeno_Click);
+            // 
+            // button_Novekvo
+            // 
+            this.button_Novekvo.Location = new System.Drawing.Point(106, 267);
+            this.button_Novekvo.Name = "button_Novekvo";
+            this.button_Novekvo.Size = new System.Drawing.Size(84, 23);
+            this.button_Novekvo.TabIndex = 18;
+            this.button_Novekvo.Text = "Növekvő";
+            this.button_Novekvo.UseVisualStyleBackColor = true;
+            this.button_Novekvo.Click += new System.EventHandler(this.button_Novekvo_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(413, 356);
+            this.Controls.Add(this.button_Novekvo);
+            this.Controls.Add(this.button_Csokkeno);
             this.Controls.Add(this.button_Helyreallit);
             this.Controls.Add(this.button_Kereses);
             this.Controls.Add(this.checkBox_PontosTalalat);
@@ -303,6 +327,8 @@
         private System.Windows.Forms.Button button_Kereses;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Button button_Helyreallit;
+        private System.Windows.Forms.Button button_Csokkeno;
+        private System.Windows.Forms.Button button_Novekvo;
     }
 }
 
