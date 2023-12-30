@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.label1 = new System.Windows.Forms.Label();
             this.textbox_ForrasFajl = new System.Windows.Forms.TextBox();
             this.button_Betoltes = new System.Windows.Forms.Button();
@@ -44,7 +45,7 @@
             this.comboBox_MinMax = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.textBox_KeresendoOrszag = new System.Windows.Forms.TextBox();
-            this.checkBox_TalalatokJelolese = new System.Windows.Forms.CheckBox();
+            this.checkBox_PontosTalalat = new System.Windows.Forms.CheckBox();
             this.button_Kereses = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.button_Helyreallit = new System.Windows.Forms.Button();
@@ -206,15 +207,15 @@
             this.textBox_KeresendoOrszag.Size = new System.Drawing.Size(196, 20);
             this.textBox_KeresendoOrszag.TabIndex = 13;
             // 
-            // checkBox_TalalatokJelolese
+            // checkBox_PontosTalalat
             // 
-            this.checkBox_TalalatokJelolese.AutoSize = true;
-            this.checkBox_TalalatokJelolese.Location = new System.Drawing.Point(196, 275);
-            this.checkBox_TalalatokJelolese.Name = "checkBox_TalalatokJelolese";
-            this.checkBox_TalalatokJelolese.Size = new System.Drawing.Size(156, 17);
-            this.checkBox_TalalatokJelolese.TabIndex = 14;
-            this.checkBox_TalalatokJelolese.Text = "Találatok jelölése a listában";
-            this.checkBox_TalalatokJelolese.UseVisualStyleBackColor = true;
+            this.checkBox_PontosTalalat.AutoSize = true;
+            this.checkBox_PontosTalalat.Location = new System.Drawing.Point(196, 275);
+            this.checkBox_PontosTalalat.Name = "checkBox_PontosTalalat";
+            this.checkBox_PontosTalalat.Size = new System.Drawing.Size(90, 17);
+            this.checkBox_PontosTalalat.TabIndex = 14;
+            this.checkBox_PontosTalalat.Text = "Pontos találat";
+            this.checkBox_PontosTalalat.UseVisualStyleBackColor = true;
             // 
             // button_Kereses
             // 
@@ -249,7 +250,7 @@
             this.ClientSize = new System.Drawing.Size(413, 356);
             this.Controls.Add(this.button_Helyreallit);
             this.Controls.Add(this.button_Kereses);
-            this.Controls.Add(this.checkBox_TalalatokJelolese);
+            this.Controls.Add(this.checkBox_PontosTalalat);
             this.Controls.Add(this.textBox_KeresendoOrszag);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.comboBox_MinMax);
@@ -266,6 +267,7 @@
             this.Controls.Add(this.label1);
             this.Cursor = System.Windows.Forms.Cursors.Default;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "Országok vizsgálata";
@@ -294,7 +296,7 @@
         private System.Windows.Forms.ComboBox comboBox_MinMax;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox textBox_KeresendoOrszag;
-        private System.Windows.Forms.CheckBox checkBox_TalalatokJelolese;
+        private System.Windows.Forms.CheckBox checkBox_PontosTalalat;
         private System.Windows.Forms.Button button_Kereses;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Button button_Helyreallit;
