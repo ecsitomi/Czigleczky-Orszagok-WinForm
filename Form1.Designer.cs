@@ -152,6 +152,7 @@
             this.textBox_EredmenyFajl.Name = "textBox_EredmenyFajl";
             this.textBox_EredmenyFajl.Size = new System.Drawing.Size(197, 20);
             this.textBox_EredmenyFajl.TabIndex = 8;
+            this.textBox_EredmenyFajl.Text = "eredmeny.txt";
             // 
             // button_Kiiras
             // 
@@ -173,6 +174,7 @@
             // 
             // comboBox_MinMax
             // 
+            this.comboBox_MinMax.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_MinMax.FormattingEnabled = true;
             this.comboBox_MinMax.Items.AddRange(new object[] {
             "Minimum",
@@ -181,6 +183,7 @@
             this.comboBox_MinMax.Name = "comboBox_MinMax";
             this.comboBox_MinMax.Size = new System.Drawing.Size(197, 21);
             this.comboBox_MinMax.TabIndex = 11;
+            this.comboBox_MinMax.SelectedIndex = 0;
             // 
             // label4
             // 
@@ -243,6 +246,8 @@
             this.Controls.Add(this.textbox_ForrasFajl);
             this.Controls.Add(this.label1);
             this.Cursor = System.Windows.Forms.Cursors.Default;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "Országok vizsgálata";
             this.groupBox1.ResumeLayout(false);
