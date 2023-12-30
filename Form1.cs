@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Collections;
 
 namespace WindowsFormsApp1
 {
@@ -22,6 +23,7 @@ namespace WindowsFormsApp1
         private List<Orszag> eredetiLista = new List<Orszag>(); //helyreállításhoz
         private List<Orszag> nagyobbMintSzaz = new List<Orszag>(); //nagy területű országok listája
         private List<Orszag> kisebbMintSzaz = new List<Orszag>(); //kisterületű országok listája
+        private List<Orszag> vizsgaltLista = new List<Orszag>(); //min-maxnál kell, hogy ne kelljen mindig helyreállítani ha mind a két értéket keresem
 
         private void button_Betoltes_Click(object sender, EventArgs e) //fájl betöltés
         {
@@ -45,7 +47,6 @@ namespace WindowsFormsApp1
                 {
                     string[] sor = sr.ReadLine().Split(';');
                     listBox_Orszagok.Items.Add(new Orszag(sor[0], Convert.ToDouble(sor[1].Replace(".",","))));
-
                 }
             }
             //Készítek egy biztonsági mentést, ha helyre kell állítani a listát
@@ -57,11 +58,14 @@ namespace WindowsFormsApp1
             button_Helyreallit.Enabled = true;
             button_Megszamolas.Enabled = true;
             button_Kereses.Enabled = true;
+            comboBox_MinMax.Enabled = true;
         }
 
         //ListBoxban szereplő országok átlag terület kiszámítása
         private void button_Teruletek_Click(object sender, EventArgs e) 
         {
+            comboBox_MinMax.Enabled = false; //átlagban nincs min max, itt kikapcsolom ezt a funkciót
+
             double osszesTerulet = 0;
             int orszagokSzama = 0;
             double teruletEredmeny = 0;
@@ -92,6 +96,8 @@ namespace WindowsFormsApp1
         //Helyreállítja a listBox-ot az eredeti listára
         private void button_Helyreallit_Click(object sender, EventArgs e)
         {
+            comboBox_MinMax.Enabled = true; //ezt sajnos mindenhol be kell kapcsolnom külön-külön
+
             if (eredetiLista.Count !=0 )
             {
                 listBox_Orszagok.Items.Clear();
@@ -106,6 +112,8 @@ namespace WindowsFormsApp1
         //Szétválogatja az országokat nagyság szerint
         private void button_Megszamolas_Click(object sender, EventArgs e)
         {
+            comboBox_MinMax.Enabled = true;
+
             listBox_Orszagok.Items.Clear(); 
             nagyobbMintSzaz.Clear();
             kisebbMintSzaz.Clear();
@@ -131,6 +139,52 @@ namespace WindowsFormsApp1
             {
                 listBox_Orszagok.Items.AddRange(kisebbMintSzaz.ToArray());
             }
+        }
+
+        //Legkisebb-legnagyobb ország kiválasztása a listából
+        private void comboBox_MinMax_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            button_Teruletek.Enabled = false; //felesleges funkció itt
+            
+            double legkisebb = double.MaxValue;
+            double legnagyobb = 0;
+            Orszag legkisebbOrszag = null;
+            Orszag legnagyobbOrszag = null;
+
+            //Itt azt próbálom hogy mind a két értéket megkapjuk helyreállítás gomb nélkül
+            if (listBox_Orszagok.Items.Count < 2)
+            {
+                listBox_Orszagok.Items.Clear();
+                listBox_Orszagok.Items.AddRange(vizsgaltLista.ToArray());
+            }
+            else
+            { 
+                vizsgaltLista.Clear();
+                vizsgaltLista.AddRange(listBox_Orszagok.Items.Cast<Orszag>());
+            }
+            foreach (Orszag orszag in listBox_Orszagok.Items)
+            {
+                //vizsgaltLista.Add(orszag);
+                if (orszag.Terulet < legkisebb) 
+                {
+                    legkisebb = orszag.Terulet;
+                    legkisebbOrszag = orszag;
+                }
+                if (orszag.Terulet > legnagyobb)
+                {
+                    legnagyobb = orszag.Terulet;
+                    legnagyobbOrszag = orszag;
+                }
+            }
+            listBox_Orszagok.Items.Clear();
+            if (comboBox_MinMax.SelectedIndex == 0)
+            {
+                listBox_Orszagok.Items.Add(legkisebbOrszag);
+            }
+            else 
+            {
+                listBox_Orszagok.Items.Add(legnagyobbOrszag);
+            } //Sikerült :)
         }
     }
 }

@@ -179,6 +179,7 @@
             // comboBox_MinMax
             // 
             this.comboBox_MinMax.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_MinMax.Enabled = false;
             this.comboBox_MinMax.FormattingEnabled = true;
             this.comboBox_MinMax.Items.AddRange(new object[] {
             "Minimum",
@@ -187,6 +188,7 @@
             this.comboBox_MinMax.Name = "comboBox_MinMax";
             this.comboBox_MinMax.Size = new System.Drawing.Size(197, 21);
             this.comboBox_MinMax.TabIndex = 11;
+            this.comboBox_MinMax.SelectedIndexChanged += new System.EventHandler(this.comboBox_MinMax_SelectedIndexChanged);
             // 
             // label4
             // 
