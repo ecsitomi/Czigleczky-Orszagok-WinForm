@@ -65,6 +65,8 @@ namespace WindowsFormsApp1
         private void button_Teruletek_Click(object sender, EventArgs e) 
         {
             comboBox_MinMax.Enabled = false; //átlagban nincs min max, itt kikapcsolom ezt a funkciót
+            //button_Kereses.Enabled = false; //szintén felesleges
+                                              //vagy mégsem, mert a vizsgált lista visszaállítható
 
             double osszesTerulet = 0;
             int orszagokSzama = 0;
@@ -97,6 +99,7 @@ namespace WindowsFormsApp1
         private void button_Helyreallit_Click(object sender, EventArgs e)
         {
             comboBox_MinMax.Enabled = true; //ezt sajnos mindenhol be kell kapcsolnom külön-külön
+            button_Kereses.Enabled = true; //ezt is
 
             if (eredetiLista.Count !=0 )
             {
@@ -113,8 +116,10 @@ namespace WindowsFormsApp1
         private void button_Megszamolas_Click(object sender, EventArgs e)
         {
             comboBox_MinMax.Enabled = true;
+            button_Kereses.Enabled = true;
 
-            listBox_Orszagok.Items.Clear(); 
+            listBox_Orszagok.Items.Clear();
+            vizsgaltLista.Clear();
             nagyobbMintSzaz.Clear();
             kisebbMintSzaz.Clear();
             //Azért kell törölni mert több listázás összadná őket a terület listákban és hibás
@@ -134,10 +139,12 @@ namespace WindowsFormsApp1
             if (radioButton_100_Nagyobb.Checked)
             {
                 listBox_Orszagok.Items.AddRange(nagyobbMintSzaz.ToArray());
+                vizsgaltLista.AddRange(nagyobbMintSzaz.ToArray());
             }
             else 
             {
                 listBox_Orszagok.Items.AddRange(kisebbMintSzaz.ToArray());
+                vizsgaltLista.AddRange(kisebbMintSzaz.ToArray());
             }
         }
 
@@ -145,7 +152,8 @@ namespace WindowsFormsApp1
         private void comboBox_MinMax_SelectedIndexChanged(object sender, EventArgs e)
         {
             button_Teruletek.Enabled = false; //felesleges funkció itt
-            
+            button_Kereses.Enabled = true; //ez viszont kellhet
+
             double legkisebb = double.MaxValue;
             double legnagyobb = 0;
             Orszag legkisebbOrszag = null;
@@ -185,6 +193,74 @@ namespace WindowsFormsApp1
             {
                 listBox_Orszagok.Items.Add(legnagyobbOrszag);
             } //Sikerült :)
+        }
+
+        //Keresés
+        private void button_Kereses_Click(object sender, EventArgs e)
+        {
+            string beirtSzoveg = textBox_KeresendoOrszag.Text.Trim().ToLower(); //levágja a spacet és kisbetűssé teszi
+            Orszag eredmeny = null;
+            List<Orszag> talalatLista = new List<Orszag>();
+
+            if (listBox_Orszagok.Items.Count < 2 || listBox_Orszagok.Items[0] is string) //ha még min-maxban lenne
+            {
+                listBox_Orszagok.Items.Clear();
+                listBox_Orszagok.Items.AddRange(vizsgaltLista.ToArray());
+            }
+
+            if (beirtSzoveg == null) //ha nem ír be semmit
+            {
+                MessageBox.Show("Szöveg megadása kötelező");
+            }
+
+            if (!checkBox_PontosTalalat.Checked) //nem pontos keresés esetén
+            {
+
+                foreach (Orszag orszag in listBox_Orszagok.Items)
+                {
+                    if (orszag.Orszagnev.Trim().ToLower().Contains(beirtSzoveg))
+                    {
+                        eredmeny = orszag;
+                        talalatLista.Add(orszag);
+                    }
+                }
+                listBox_Orszagok.Items.Clear();
+                listBox_Orszagok.Items.AddRange(talalatLista.ToArray());
+            }
+            else //pontos keresés esetén
+            {
+                foreach (Orszag orszag in listBox_Orszagok.Items)
+                {
+                    if (orszag.Orszagnev.Trim().ToLower()==beirtSzoveg.Trim().ToLower())
+                    {
+                        eredmeny = orszag;
+                        talalatLista.Add(orszag);
+                    }
+                }
+                if (eredmeny == null)
+                {
+                    MessageBox.Show("Nincs találat!");
+                }
+                else 
+                {
+                    listBox_Orszagok.Items.Clear();
+                    listBox_Orszagok.Items.AddRange(talalatLista.ToArray());
+                }
+            }
+            textBox_KeresendoOrszag.Clear();
+        }
+        //Keresés indítása enter leütéssel
+        private void textBox_KeresendoOrszag_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                button_Kereses_Click(sender, e);
+            }
+        }
+
+        private void button_Kiiras_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -167,6 +167,7 @@
             this.button_Kiiras.TabIndex = 9;
             this.button_Kiiras.Text = "Kiírás";
             this.button_Kiiras.UseVisualStyleBackColor = true;
+            this.button_Kiiras.Click += new System.EventHandler(this.button_Kiiras_Click);
             // 
             // label3
             // 
@@ -206,6 +207,7 @@
             this.textBox_KeresendoOrszag.Name = "textBox_KeresendoOrszag";
             this.textBox_KeresendoOrszag.Size = new System.Drawing.Size(196, 20);
             this.textBox_KeresendoOrszag.TabIndex = 13;
+            this.textBox_KeresendoOrszag.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeresendoOrszag_KeyPress);
             // 
             // checkBox_PontosTalalat
             // 
@@ -226,6 +228,7 @@
             this.button_Kereses.TabIndex = 15;
             this.button_Kereses.Text = "Keresés";
             this.button_Kereses.UseVisualStyleBackColor = true;
+            this.button_Kereses.Click += new System.EventHandler(this.button_Kereses_Click);
             // 
             // openFileDialog1
             // 
@@ -239,7 +242,7 @@
             this.button_Helyreallit.Name = "button_Helyreallit";
             this.button_Helyreallit.Size = new System.Drawing.Size(377, 23);
             this.button_Helyreallit.TabIndex = 16;
-            this.button_Helyreallit.Text = "Helyreállítás";
+            this.button_Helyreallit.Text = "Lista visszaállítása";
             this.button_Helyreallit.UseVisualStyleBackColor = false;
             this.button_Helyreallit.Click += new System.EventHandler(this.button_Helyreallit_Click);
             // 
