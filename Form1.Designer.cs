@@ -47,6 +47,7 @@
             this.checkBox_TalalatokJelolese = new System.Windows.Forms.CheckBox();
             this.button_Kereses = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.button_Helyreallit = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -94,6 +95,7 @@
             this.button_Teruletek.TabIndex = 4;
             this.button_Teruletek.Text = "Területek átlaga";
             this.button_Teruletek.UseVisualStyleBackColor = true;
+            this.button_Teruletek.Click += new System.EventHandler(this.button_Teruletek_Click);
             // 
             // groupBox1
             // 
@@ -183,7 +185,6 @@
             this.comboBox_MinMax.Name = "comboBox_MinMax";
             this.comboBox_MinMax.Size = new System.Drawing.Size(197, 21);
             this.comboBox_MinMax.TabIndex = 11;
-            this.comboBox_MinMax.SelectedIndex = 0;
             // 
             // label4
             // 
@@ -224,11 +225,24 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // button_Helyreallit
+            // 
+            this.button_Helyreallit.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.button_Helyreallit.Enabled = false;
+            this.button_Helyreallit.Location = new System.Drawing.Point(16, 329);
+            this.button_Helyreallit.Name = "button_Helyreallit";
+            this.button_Helyreallit.Size = new System.Drawing.Size(377, 23);
+            this.button_Helyreallit.TabIndex = 16;
+            this.button_Helyreallit.Text = "Helyreállítás";
+            this.button_Helyreallit.UseVisualStyleBackColor = false;
+            this.button_Helyreallit.Click += new System.EventHandler(this.button_Helyreallit_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(413, 341);
+            this.ClientSize = new System.Drawing.Size(413, 356);
+            this.Controls.Add(this.button_Helyreallit);
             this.Controls.Add(this.button_Kereses);
             this.Controls.Add(this.checkBox_TalalatokJelolese);
             this.Controls.Add(this.textBox_KeresendoOrszag);
@@ -278,6 +292,7 @@
         private System.Windows.Forms.CheckBox checkBox_TalalatokJelolese;
         private System.Windows.Forms.Button button_Kereses;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.Button button_Helyreallit;
     }
 }
 
