@@ -132,12 +132,14 @@
             // 
             // button_Megszamolas
             // 
+            this.button_Megszamolas.Enabled = false;
             this.button_Megszamolas.Location = new System.Drawing.Point(196, 87);
             this.button_Megszamolas.Name = "button_Megszamolas";
             this.button_Megszamolas.Size = new System.Drawing.Size(198, 23);
             this.button_Megszamolas.TabIndex = 6;
             this.button_Megszamolas.Text = "Megszámolás";
             this.button_Megszamolas.UseVisualStyleBackColor = true;
+            this.button_Megszamolas.Click += new System.EventHandler(this.button_Megszamolas_Click);
             // 
             // label2
             // 
@@ -214,6 +216,7 @@
             // 
             // button_Kereses
             // 
+            this.button_Kereses.Enabled = false;
             this.button_Kereses.Location = new System.Drawing.Point(196, 299);
             this.button_Kereses.Name = "button_Kereses";
             this.button_Kereses.Size = new System.Drawing.Size(197, 23);

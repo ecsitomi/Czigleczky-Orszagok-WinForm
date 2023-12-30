@@ -16,12 +16,14 @@ namespace WindowsFormsApp1
         public Form1()
         {
             InitializeComponent();
-
         }
 
-        private List<Orszag> eredetiLista = new List<Orszag>();
+        //Objektum listák amiket később használunk majd
+        private List<Orszag> eredetiLista = new List<Orszag>(); //helyreállításhoz
+        private List<Orszag> nagyobbMintSzaz = new List<Orszag>(); //nagy területű országok listája
+        private List<Orszag> kisebbMintSzaz = new List<Orszag>(); //kisterületű országok listája
 
-        private void button_Betoltes_Click(object sender, EventArgs e)
+        private void button_Betoltes_Click(object sender, EventArgs e) //fájl betöltés
         {
             listBox_Orszagok.Items.Clear();
             openFileDialog1.Filter = "Vesszővel elválasztott szövegfájl (*.csv)|*.csv|Text fájlok (*.txt)|*.txt|Minden fájl|*.*";
@@ -31,11 +33,10 @@ namespace WindowsFormsApp1
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 OrszagokBeolvasasa(openFileDialog1.FileName);
-
             }
         }
 
-        private void OrszagokBeolvasasa(string forrasFajl)
+        private void OrszagokBeolvasasa(string forrasFajl) //betöltött fájl beolvasása a listaBoxba
         {
             using (StreamReader sr = new StreamReader(forrasFajl))
             {
@@ -50,24 +51,29 @@ namespace WindowsFormsApp1
             //Készítek egy biztonsági mentést, ha helyre kell állítani a listát
             eredetiLista.Clear();
             eredetiLista.AddRange(listBox_Orszagok.Items.Cast<Orszag>());
-            button_Helyreallit.Enabled = true;
+            //Bekapcsolom a kikapcsolt gombokat
             button_Betoltes.Enabled = false;
             button_Betoltes.Text = "Betöltve";
+            button_Helyreallit.Enabled = true;
+            button_Megszamolas.Enabled = true;
+            button_Kereses.Enabled = true;
         }
 
-        private void button_Teruletek_Click(object sender, EventArgs e)
+        //ListBoxban szereplő országok átlag terület kiszámítása
+        private void button_Teruletek_Click(object sender, EventArgs e) 
         {
+            double osszesTerulet = 0;
+            int orszagokSzama = 0;
+            double teruletEredmeny = 0;
             if (listBox_Orszagok.Items.Count != 0)
             {
                 //Kiszámolja az átlag területet
-                double osszesTerulet = 0;
-                int orszagokSzama = 0;
                 foreach (Orszag orszag in listBox_Orszagok.Items)
                 {
                     osszesTerulet += orszag.Terulet;
                     orszagokSzama++;
                 }
-                double teruletEredmeny = osszesTerulet / orszagokSzama;
+                teruletEredmeny = osszesTerulet / orszagokSzama;
 
                 //kiírja az átlag területet
                 string kiirtEredmeny = teruletEredmeny.ToString("N2");
@@ -79,11 +85,11 @@ namespace WindowsFormsApp1
             }
             else
             {
-                MessageBox.Show("Először töltse be a forrásfájlt!");
+                MessageBox.Show("Először töltse be a forrásfájlt!"); //Ha nincs mit kiszámolni
             }
             
         }
-
+        //Helyreállítja a listBox-ot az eredeti listára
         private void button_Helyreallit_Click(object sender, EventArgs e)
         {
             if (eredetiLista.Count !=0 )
@@ -94,6 +100,36 @@ namespace WindowsFormsApp1
             else 
             {
                 MessageBox.Show("Először töltse be az eredeti forrásfájlt!");
+            }
+        }
+
+        //Szétválogatja az országokat nagyság szerint
+        private void button_Megszamolas_Click(object sender, EventArgs e)
+        {
+            listBox_Orszagok.Items.Clear(); 
+            nagyobbMintSzaz.Clear();
+            kisebbMintSzaz.Clear();
+            //Azért kell törölni mert több listázás összadná őket a terület listákban és hibás
+            //eredményt adna ha területet számolnék
+            foreach (Orszag orszag in eredetiLista)
+            {
+                if (orszag.Terulet > 100000)
+                {
+                    nagyobbMintSzaz.Add(orszag);
+                }
+                else 
+                {
+                    kisebbMintSzaz.Add(orszag);  
+                }
+            }
+            //Itt meg kiíratja a kiválasztott nagyság szerint
+            if (radioButton_100_Nagyobb.Checked)
+            {
+                listBox_Orszagok.Items.AddRange(nagyobbMintSzaz.ToArray());
+            }
+            else 
+            {
+                listBox_Orszagok.Items.AddRange(kisebbMintSzaz.ToArray());
             }
         }
     }
