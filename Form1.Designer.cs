@@ -208,6 +208,7 @@
             // 
             // textBox_KeresendoOrszag
             // 
+            this.textBox_KeresendoOrszag.Enabled = false;
             this.textBox_KeresendoOrszag.Location = new System.Drawing.Point(197, 248);
             this.textBox_KeresendoOrszag.Name = "textBox_KeresendoOrszag";
             this.textBox_KeresendoOrszag.Size = new System.Drawing.Size(196, 20);

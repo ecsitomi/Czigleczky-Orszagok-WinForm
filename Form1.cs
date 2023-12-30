@@ -72,6 +72,7 @@ namespace WindowsFormsApp1
             button_Kiiras.Enabled = true;
             button_Kereses.Enabled = true;
             comboBox_MinMax.Enabled = true;
+            textBox_KeresendoOrszag.Enabled = true;
         }
 
         //ListBoxban szereplő országok átlag terület kiszámítása
@@ -356,7 +357,5 @@ namespace WindowsFormsApp1
                 MessageBox.Show("Az elemek típusa nem megfelelő");
             }
         }
-
-        
     }
 }
